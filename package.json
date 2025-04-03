@@ -4,12 +4,15 @@
   "description": "Tour site",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "start:prod": "set NODE_ENV=production&& nodemon server.js"
   },
   "author": "Avi Shukla",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "mongoose": "^8.13.1",
     "morgan": "^1.10.0",
     "nodemon": "^3.1.9"
   }
