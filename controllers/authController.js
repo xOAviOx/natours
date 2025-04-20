@@ -24,6 +24,19 @@ exports.signUp = catchAsync(async (req, res, next) => {
 
   const token = signToken(newUser._id);
 
+  //sending cookie
+  const cookieOptions = {
+    expires: new Date(
+      Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
+    ),
+    secure: true,
+    httpOnly: true,
+  };
+  if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
+  res.cookie('jwt', token, cookieOptions);
+  //remove the password from output
+  newUser.password = undefined;
+
   res.status(201).json({
     status: 'success',
     token,
@@ -52,6 +65,20 @@ exports.login = catchAsync(async (req, res, next) => {
   console.log(user);
   //3 If everything ok, send token to client
   const token = signToken(user._id);
+
+  //sending cookie
+  const cookieOptions = {
+    expires: new Date(
+      Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
+    ),
+    secure: true,
+    httpOnly: true,
+  };
+  if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
+  res.cookie('jwt', token, cookieOptions);
+  //remove the password from output
+  user.password = undefined;
+
   res.status(200).json({
     status: 'success',
     token,
@@ -173,6 +200,19 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   //4 log the user in,send jwt
   const token = signToken(user._id);
 
+  //sending cookie
+  const cookieOptions = {
+    expires: new Date(
+      Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
+    ),
+    secure: true,
+    httpOnly: true,
+  };
+  if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
+  res.cookie('jwt', token, cookieOptions);
+  //remove the password from output
+  user.password = undefined;
+
   res.status(201).json({
     status: 'success',
     token,
@@ -192,9 +232,22 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
   user.passwordConfirm = req.body.passwordConfirm;
   await user.save();
   //User.findById will not work as intended
-  
+
   //4 log user in, send jwt
   const token = signToken(user._id);
+
+  //sending cookie
+  const cookieOptions = {
+    expires: new Date(
+      Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
+    ),
+    secure: true,
+    httpOnly: true,
+  };
+  if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
+  res.cookie('jwt', token, cookieOptions);
+  //remove the password from output
+  user.password = undefined;
 
   res.status(201).json({
     status: 'success',
