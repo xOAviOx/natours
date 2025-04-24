@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const slugify = require('slugify');
 const validator = require('validator');
+const User = require('./userModel');
 
 const tourSchema = new mongoose.Schema(
   {
@@ -101,6 +102,12 @@ const tourSchema = new mongoose.Schema(
         day: Number,
       },
     ],
+    guides: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User',
+      },
+    ],
   },
   {
     toJSON: { virtuals: true },
@@ -141,7 +148,6 @@ tourSchema.post('/^find/', function (docs, next) {
 });
 
 //Aggregation middleware
-
 tourSchema.pre('aggregate', function (next) {
   this.pipeline().unshift({ $match: { secretTour: { $ne: true } } });
   console.log(this.pipeline());
