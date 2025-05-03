@@ -14,7 +14,7 @@ exports.getOverview = catchAsync(async (req, res) => {
   });
 });
 
-exports.getTourView = catchAsync(async (req, res) => {
+exports.getTourView = catchAsync(async (req, res, next) => {
   //1 get the data, for the requested tour (including reviews and guides)
   const tour = await Tour.findOne({ slug: req.params.slug }).populate({
     path: 'reviews',
@@ -30,3 +30,15 @@ exports.getTourView = catchAsync(async (req, res) => {
     tour,
   });
 });
+
+exports.getLogin = async (req, res) => {
+  res
+    .status(200)
+    .set(
+      'Content-Security-Policy',
+      "connect-src 'self' https://cdnjs.cloudflare.com"
+    )
+    .render('login', {
+      title: 'Log into your account',
+    });
+};

@@ -13,6 +13,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const app = express();
+const cookieParser = require('cookie-parser');
 
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
@@ -62,7 +63,7 @@ app.use('/api', limiter);
 
 //body parser, reading data from the body into req.body
 app.use(express.json({ limit: '10kb' }));
-
+app.use(cookieParser());
 //data sanitization against nosql query injection
 app.use(mongoSanitize());
 
@@ -86,6 +87,7 @@ app.use(
 //test middleware
 app.use((req, res, next) => {
   req.requestTime = new Date().toISOString();
+  console.log(req.cookies);
   next();
 });
 
