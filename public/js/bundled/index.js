@@ -707,7 +707,7 @@ if (userDataForm) userDataForm.addEventListener("submit", (e)=>{
     form.append("name", document.getElementById("name").value);
     form.append("email", document.getElementById("email").value);
     form.append("photo", document.getElementById("photo").files[0]);
-    console.log(form);
+    // console.log(form);
     (0, _updateSettings.updateSettings)(form, "data");
 });
 if (userPasswordForm) userPasswordForm.addEventListener("submit", async (e)=>{
@@ -2640,37 +2640,35 @@ var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _alert = require("./alert");
 const login = async (email, password)=>{
-    console.log(email, password);
     try {
         const res = await (0, _axiosDefault.default)({
-            method: 'POST',
-            url: 'http://127.0.0.1:3000/api/v1/users/login',
+            method: "POST",
+            url: "/api/v1/users/login",
             data: {
                 email,
                 password
             }
         });
-        if (res.data.status === 'success') {
-            (0, _alert.showAlert)('success', 'Logged in successfully');
+        if (res.data.status === "success") {
+            (0, _alert.showAlert)("success", "Logged in successfully");
             window.setTimeout(()=>{
-                location.assign('/');
+                location.assign("/");
             }, 1500);
         }
-        console.log(res);
     } catch (err) {
-        (0, _alert.showAlert)('error', err.response.data.message);
+        (0, _alert.showAlert)("error", err.response.data.message);
     }
 };
 const logout = async ()=>{
     try {
         const res = await (0, _axiosDefault.default)({
-            method: 'GET',
-            url: 'http://127.0.0.1:3000/api/v1/users/logout'
+            method: "GET",
+            url: "/api/v1/users/logout"
         });
-        res.data.status = 'success';
+        res.data.status = "success";
         location.reload(true);
     } catch (err) {
-        (0, _alert.showAlert)('error', 'Error logging out! Try again.');
+        (0, _alert.showAlert)("error", "Error logging out! Try again.");
     }
 };
 
@@ -7477,7 +7475,7 @@ var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _alert = require("./alert");
 const updateSettings = async (data, type)=>{
     try {
-        const url = type === "password" ? "http://127.0.0.1:3000/api/v1/users/updateMyPassword" : "http://127.0.0.1:3000/api/v1/users/updateMe";
+        const url = type === "password" ? "/api/v1/users/updateMyPassword" : "/api/v1/users/updateMe";
         const res = await (0, _axiosDefault.default)({
             method: "PATCH",
             url,
@@ -7501,8 +7499,8 @@ const stripe = Stripe("pk_test_51RLTRxDI2o6j6T6whE5zfDL7zZo30CLusCq9rZ2prLUCv39i
 const bookTour = async (tourId)=>{
     try {
         //1  get checkout session from endpoint
-        const session = await (0, _axiosDefault.default)(`http://127.0.0.1:3000/api/v1/bookings/checkout-session/${tourId}`);
-        console.log(session);
+        const session = await (0, _axiosDefault.default)(`/api/v1/bookings/checkout-session/${tourId}`);
+        // console.log(session);
         //2 create checkout form + charge credit card
         // await stripe.redirectToCheckout({
         //   sessionId: session.data.session.id,
@@ -54732,7 +54730,7 @@ const signup = async (name, email, password, passwordConfirm)=>{
     try {
         const res = await (0, _axiosDefault.default)({
             method: "POST",
-            url: "http://127.0.0.1:3000/api/v1/users/signup",
+            url: "/api/v1/users/signup",
             data: {
                 name,
                 email,
