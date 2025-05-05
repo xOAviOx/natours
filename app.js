@@ -4,6 +4,7 @@ const AppError = require("./utils/appError");
 const tourRouter = require("./routes/tourRoutes");
 const userRouter = require("./routes/userRoutes");
 const reviewRouter = require("./routes/reviewRoutes");
+const bookingRouter = require("./routes/bookingRoutes");
 const viewRouter = require("./routes/viewRoutes");
 const morgan = require("morgan");
 const globalErrorHandler = require("./controllers/errorController");
@@ -39,6 +40,7 @@ const connectSrcUrls = [
   "https://unpkg.com",
   "https://tile.openstreetmap.org",
   "ws://127.0.0.1:*",
+  "https://js.stripe.com/v3/",
 ];
 const fontSrcUrls = ["fonts.googleapis.com", "fonts.gstatic.com"];
 
@@ -99,6 +101,7 @@ app.use((req, res, next) => {
 app.use("/api/v1/tours/", tourRouter);
 app.use("/api/v1/users/", userRouter);
 app.use("/api/v1/reviews/", reviewRouter);
+app.use("/api/v1/bookings/", bookingRouter);
 app.use("/", viewRouter);
 app.all("*", (req, res, next) => {
   // const err = new Error(`Can't find ${req.originalUrl} on this server!`);
