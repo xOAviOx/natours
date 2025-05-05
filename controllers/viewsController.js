@@ -47,6 +47,17 @@ exports.getLogin = async (req, res) => {
       title: "Log into your account",
     });
 };
+exports.getSignUp = async (req, res) => {
+  res
+    .status(200)
+    .set(
+      "Content-Security-Policy",
+      "connect-src 'self' https://cdnjs.cloudflare.com"
+    )
+    .render("signup", {
+      title: "Sign Into Natours",
+    });
+};
 
 exports.getAccount = (req, res) => {
   res.status(200).render("account", {
