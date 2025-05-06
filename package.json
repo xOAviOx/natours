@@ -6,6 +6,10 @@
   "targets": {
     "main": false
   },
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "engines": {
+    "node": ">=8.3.0"
+  },
   "scripts": {
     "start": "node server.js",
     "start:prod": "set NODE_ENV=production&& node server.js",
