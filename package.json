@@ -7,8 +7,8 @@
     "main": false
   },
   "scripts": {
-    "start": "nodemon server.js",
-    "start:prod": "set NODE_ENV=production&& nodemon server.js",
+    "start": "node server.js",
+    "start:prod": "set NODE_ENV=production&& node server.js",
     "build": "parcel build ./public/js/index.js --dist-dir ./public/js/bundled",
     "watch:js": "parcel watch ./public/js/index.js --dist-dir ./public/js/bundled"
   },
