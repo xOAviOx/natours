@@ -49,6 +49,7 @@ exports.signUp = catchAsync(async (req, res, next) => {
   });
 });
 
+//login function
 exports.login = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
 
