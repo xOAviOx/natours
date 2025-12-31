@@ -12,6 +12,7 @@ const signToken = (id) => {
   });
 };
 
+// sigunp function and welcome email 
 exports.signUp = catchAsync(async (req, res, next) => {
   const newUser = await User.create({
     name: req.body.name,
